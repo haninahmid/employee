@@ -1,7 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+// Auther: Hanin Ahmid
+// 2024 - 04 - 26
+// phone : 218928677228
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +23,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
 Route::get('/', function () {
     return view('welcome');
 });
