@@ -22,9 +22,10 @@ Route::post('/login', [LoginController::class, 'login']);
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [LoginController::class, 'showLoginForm']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
-Route::get('/', [LoginController::class, 'login']);
+// Route::post('/', [LoginController::class, 'login']);
